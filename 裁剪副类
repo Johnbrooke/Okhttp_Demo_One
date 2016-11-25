@@ -1,0 +1,29 @@
+package com.example.administrator.mydemo_onepic_2;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.transition.TransitionPropagation;
+import android.view.animation.Transformation;
+
+/**
+ * Created by Administrator on 2016/11/25 0025.
+ */
+public class CropsquareTrans implements com.squareup.picasso.Transformation {
+
+    @Override
+    public Bitmap transform(Bitmap source) {
+        int size = Math.min(source.getHeight(),source.getWidth());
+        int x = (source.getWidth() -size)/2;
+        int y = (source.getHeight() - size)/2;
+        Bitmap bitmap = Bitmap.createBitmap(source,x,y,size,size);
+        if (bitmap != source){
+            source.recycle();
+        }
+        return bitmap;
+    }
+
+    @Override
+    public String key() {
+        return "square()";
+    }
+}
